@@ -70,3 +70,7 @@ li p {
   display: flex;
   align-items: center;
 }
+
+.todo-area {
+  width: 200px;
+}

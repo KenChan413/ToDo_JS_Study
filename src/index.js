@@ -14,6 +14,7 @@ const onClickAdd = () => {
 
   // pタグ生成
   const p = document.createElement("p");
+  p.className = "todo-area";
   p.innerText = inputText;
 
   // button(完了)タグ生成
