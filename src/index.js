@@ -23,6 +23,39 @@ const onClickAdd = () => {
   completeButton.addEventListener("click", () => {
     // 押された完了ボタンの親タグ(div)の親タグ(li)を未完了リストから削除
     deleteFromIncompleteList(completeButton.parentNode.parentNode);
+
+    // 完了テキストに追加する要素
+    const addTarget = completeButton.parentNode.parentNode;
+
+    // TODO内容テキストを取得
+    const text = addTarget.firstElementChild.firstElementChild.innerText;
+
+    // div以下を初期化
+    addTarget.firstElementChild.textContent = null;
+
+    // pタグ生成
+    const p = document.createElement("p");
+    p.className = "todo-area";
+    p.innerText = text;
+
+    // button(戻す)タグ生成
+    const backButton = document.createElement("button");
+    backButton.innerText = "戻す";
+    backButton.addEventListener("click", () => {
+      // 押された戻すボタンの親タグ（li）を完了リストから削除
+      const deleteTarget = backButton.parentNode.parentElement;
+      document.getElementById("complete-list").removeChild(deleteTarget);
+      // テキスト取得
+      const text = deleteTarget.firstElementChild.firstElementChild.innerText;
+      console.log(text);
+    });
+
+    // divタグの子要素に各要素を追加
+    addTarget.firstChild.appendChild(p);
+    addTarget.firstChild.appendChild(backButton);
+
+    // 完了リストに追加
+    document.getElementById("complete-list").appendChild(addTarget);
   });
 
   // button(削除)タグ生成
@@ -47,6 +80,9 @@ const onClickAdd = () => {
 const deleteFromIncompleteList = (target) => {
   document.getElementById("incomplete-list").removeChild(target);
 };
+
+// 未完了リストに追加する関数
+const createIncompleteList = (text) => {};
 
 document
   .getElementById("add-button")
